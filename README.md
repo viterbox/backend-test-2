@@ -8,7 +8,7 @@ Users can rate their orders from 1 to 5 and leave a comment. Order ID is provide
 
 ### Functionality
 
-1 - Write an HTTP endpoint for users to be able to create/read/edite/delete a feedback for a order.
+1 - Write an HTTP endpoint for users to be able to create/read/edit/delete a feedback for an order.
 
 2 - Write an HTTP endpoint to get the **last** 20 feedbacks left by users and allow filtering by rating.
 
