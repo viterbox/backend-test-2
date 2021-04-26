@@ -1,16 +1,16 @@
 # Back-end Developer Test 2
 
-You are to write a new API that will allow users to share feedback on their grocery orders and allow visibility to a live operations team.
+You are to write a new API that will allow users to share reviews on their grocery orders and allow visibility to a live operations team.
 
 Users can rate their orders from 1 to 5 and leave a comment. Order ID is provided in the url path and the User ID is in the header named `UserId`.
 
-**User can only leave one feedback per order.**
+**User can only leave one review per order.**
 
 ### Functionality
 
-1 - Write an HTTP endpoint for users to be able to create/read/edit/delete a feedback for an order.
+1 - Write an HTTP endpoint for users to be able to create/read/edit/delete a review for an order.
 
-2 - Write an HTTP endpoint to get the **last** 20 feedbacks left by users and allow filtering by rating.
+2 - Write an HTTP endpoint to get the **last** 20 reviews left by users and allow filtering by rating.
 
 - The API should follow typical RESTful API design pattern.
 - The data should be saved in the DB.
@@ -40,7 +40,7 @@ Here's what you should strive for:
 ### Bonus
 
   - Provide proper unit tests.
-  - Add an endpoint to allow users share feedback about the items contained in its orders
+  - Add an endpoint to allow users share reviews about the items contained in its orders
   - Providing an online demo is welcomed, but not required.
 
 ## Good luck!
