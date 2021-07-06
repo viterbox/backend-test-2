@@ -26,8 +26,8 @@ server.use((req, res, next) => {
 });
 
 //rutas
-server.use('/review/store', require('./routes/store.routes'))
-server.use('/review/user', require('./routes/users.routes'))
+server.use('/reviews', require('./routes/store.routes'))
+server.use('/users', require('./routes/users.routes'))
 
 //servidor
 server.listen(server.get('port'), () => {

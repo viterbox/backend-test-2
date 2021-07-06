@@ -3,22 +3,29 @@ const router = express.Router()
 
 const Review = require('../models/reviews')
 
-router.get("/all", async (req, res) => {
-    const art = await Review.find()
+router.get("/", async (req, res) => {
+    let art = [];
+    if(req.id) {
+        art = await Review.find({ usuario_id: req.id })
+    } else {
+        art = await Review.find();
+    }
+   
     res.json(art)
 })
 
-router.get("/get/:id", async(req, res) => {
-    const rev = await Review.findById(req.params.id)
+router.get("/:idReview", async(req, res) => {
+    console.log("req params ",req.id);
+    console.info(req.params)
+    const rev = await Review.findById(req.params.idReview)
     res.json(rev)
 })
 
-router.post("/save", async (req, res) => {
-    const {texto, calificacion, usuario } = req.body
+router.post("/", async (req, res) => {
+    const {texto, calificacion, usuario_id } = req.body
     const art = new Review({
-        texto, calificacion, usuario
+        texto, calificacion, usuario_id
     })
-    console.log("usuario ",usuario)
     await art.save()
 
     res.json({
@@ -27,25 +34,25 @@ router.post("/save", async (req, res) => {
     })
 })
 
-router.put("/update/:id", async (req, res) => {
+router.put("/:idReview", async (req, res) => {
     const { texto, calificacion, usuario } = req.body
     const art = {texto, calificacion, usuario}
-    await Review.findByIdAndUpdate(req.params.id, art)
+    await Review.findByIdAndUpdate(req.params.idReview, art)
     res.json({
         status: "Reseña actualizada"
     })
 })
 
-router.delete("/delete/:id", async (req, res) => {
-    await Review.findByIdAndRemove(req.params.id)
+router.delete("/:idReview", async (req, res) => {
+    await Review.findByIdAndRemove(req.params.idReview)
     res.json({
         status: "Reseña borrada"
     })
 })
 
-router.post("/get/myreviews", async(req, res) => {
-    const rev = await Review.find({usuario: req.body.usuario})
-    res.json(rev)
-})
+// router.get("/users/:id/reviews/:id", async(req, res) => {
+//     const rev = await Review.find({usuario_id: req.params.id})
+//     res.json(rev)
+// })
 
 module.exports = router

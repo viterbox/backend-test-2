@@ -5,10 +5,35 @@ const router = express.Router()
 const User = require('../models/users')
 
 router.get("/", async (req, res) => {
+    const response = await User.find()
+    res.json(response)
+})
+
+router.get("/:id", async(req, res) => {
+    const response = await User.findById(req.params.id)
+    res.json(response)
+})
+
+router.put("/:id", async(req, res) => {
+    const {nombre, correo, password} = req.body
+    const new_data = {nombre, correo, password}
+    await User.findOneAndUpdate(req.params.id, new_data)
     res.json({
-        status: "peticion exitosa"
+        status: "Usuario actualizado"
     })
 })
+
+router.use("/:id/reviews", async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+    if(user){
+        req.id = req.params.id
+        next();
+    } else {
+        res.json({
+            message: 'Usuario no encontrado'
+        });
+    }
+} ,require('./store.routes'))
 
 router.post("/signUp", async (req, res) => {
     const {nombre, correo, password} = req.body
